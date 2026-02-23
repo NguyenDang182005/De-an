@@ -1,0 +1,129 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const Register = () => {
+    const [formData, setFormData] = useState({
+        fullName: '',
+        phoneNumber: '',
+        email: '',
+        password: ''
+    });
+    const [status, setStatus] = useState({ type: '', message: '' });
+    const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setStatus({ type: '', message: '' });
+
+        try {
+            const response = await axios.post('http://localhost:8080/api/auth/register', formData);
+
+            setStatus({ type: 'success', message: response.data.message || 'Registration successful! Redirecting...' });
+
+            setTimeout(() => {
+                navigate('/login');
+            }, 1500);
+        } catch (err) {
+            setStatus({
+                type: 'error',
+                message: err.response?.data?.message || 'Registration failed. Please try again.'
+            });
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="grow flex items-center justify-center p-4 bg-gray-50 h-screen">
+            <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 border border-gray-100">
+                <Link to="/" className="text-booking-blue font-bold text-2xl block text-center mb-6">Booking.com</Link>
+                <h1 className="text-2xl font-bold mb-6 text-gray-900">Create an account</h1>
+
+                <form onSubmit={handleRegister} className="space-y-4">
+                    <div>
+                        <label className="block mb-1 text-sm font-semibold text-gray-700">Full Name</label>
+                        <input
+                            type="text"
+                            name="fullName"
+                            required
+                            placeholder="Enter your full name"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-booking-blue focus:ring-1 focus:ring-booking-blue transition"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block mb-1 text-sm font-semibold text-gray-700">Phone Number</label>
+                        <input
+                            type="tel"
+                            name="phoneNumber"
+                            placeholder="Enter your phone number"
+                            value={formData.phoneNumber}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-booking-blue focus:ring-1 focus:ring-booking-blue transition"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block mb-1 text-sm font-semibold text-gray-700">Email address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder="name@domain.com"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-booking-blue focus:ring-1 focus:ring-booking-blue transition"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block mb-1 text-sm font-semibold text-gray-700">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            required
+                            placeholder="Create a strong password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-booking-blue focus:ring-1 focus:ring-booking-blue transition"
+                        />
+                    </div>
+
+                    {status.message && (
+                        <div className={`text-sm p-3 rounded font-medium border ${status.type === 'error' ? 'text-red-600 bg-red-50 border-red-200' : 'text-green-700 bg-green-50 border-green-200'
+                            }`}>
+                            {status.message}
+                        </div>
+                    )}
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full bg-booking-blue text-white font-bold py-3 px-4 rounded hover:bg-booking-dark transition-colors mt-2 disabled:opacity-70"
+                    >
+                        {loading ? 'Creating...' : 'Create account'}
+                    </button>
+                </form>
+
+                <div className="mt-6 text-center text-sm">
+                    <span className="text-gray-600">Already have an account? </span>
+                    <Link to="/login" className="text-booking-blue hover:underline font-semibold">Sign in</Link>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Register;
