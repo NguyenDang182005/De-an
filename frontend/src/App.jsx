@@ -5,6 +5,12 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Flights from "./pages/Flights";
+import FlightAndHotel from "./pages/FlightAndHotel";
+import CarRental from "./pages/CarRental";
+import Attractions from "./pages/Attractions";
+import AirportTaxis from "./pages/AirportTaxis";
+
 
 function AppContent() {
   const location = useLocation();
@@ -19,6 +25,11 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/flights" element={<Flights />} />
+        <Route path="/flight-hotel" element={<FlightAndHotel />} />
+        <Route path="/car-rentals" element={<CarRental />} />
+        <Route path="/attractions" element={<Attractions />} />
+        <Route path="/airport-taxis" element={<AirportTaxis />} />
       </Routes>
 
       {!isAuthPage && <Footer />}

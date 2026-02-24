@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
 const Navbar = () => {
     return (
@@ -41,21 +42,41 @@ const Navbar = () => {
                     <button className="flex items-center space-x-2 border border-white bg-booking-dark rounded-full px-4 py-2 font-semibold">
                         <i className="fa-solid fa-bed"></i> <span>Stays</span>
                     </button>
-                    <button className="flex items-center space-x-2 hover:bg-booking-dark rounded-full px-4 py-2 font-semibold transition-colors">
-                        <i className="fa-solid fa-plane"></i> <span>Flights</span>
-                    </button>
-                    <button className="flex items-center space-x-2 hover:bg-booking-dark rounded-full px-4 py-2 font-semibold transition-colors">
-                        <i className="fa-solid fa-earth-americas"></i> <span>Flight + Hotel</span>
-                    </button>
-                    <button className="flex items-center space-x-2 hover:bg-booking-dark rounded-full px-4 py-2 font-semibold transition-colors">
-                        <i className="fa-solid fa-car"></i> <span>Car rentals</span>
-                    </button>
-                    <button className="flex items-center space-x-2 hover:bg-booking-dark rounded-full px-4 py-2 font-semibold transition-colors">
-                        <i className="fa-brands fa-fort-awesome"></i> <span>Attractions</span>
-                    </button>
-                    <button className="flex items-center space-x-2 hover:bg-booking-dark rounded-full px-4 py-2 font-semibold transition-colors">
-                        <i className="fa-solid fa-taxi"></i> <span>Airport taxis</span>
-                    </button>
+                    <Link 
+                    to="/flights" 
+                    className="flex items-center space-x-2 hover:bg-booking-dark rounded-full px-4 py-2 font-semibold transition-colors text-white no-underline"
+                    >
+                    <i className="fa-solid fa-plane"></i> 
+                    <span>Flights</span>
+                    </Link>
+                    <Link 
+                    to="/flight-hotel" 
+                    className="flex items-center space-x-2 hover:bg-booking-dark rounded-full px-4 py-2 font-semibold text-white no-underline"
+                    >
+                    <i className="fa-solid fa-suitcase"></i> 
+                    <span>Flight + Hotel</span>
+                    </Link>
+                    <Link 
+                    to="/car-rentals" 
+                    className="flex items-center space-x-2 hover:bg-white/10 rounded-full px-4 py-2 font-semibold text-white no-underline"
+                    >
+                    <i className="fa-solid fa-car"></i> 
+                    <span>Car rentals</span>
+                    </Link>
+                    <Link 
+                    to="/attractions" 
+                    className="flex items-center space-x-2 hover:bg-white/10 rounded-full px-4 py-2 font-semibold text-white no-underline"
+                    >
+                    <i className="fa-solid fa-fort-awesome"></i> 
+                    <span>Attractions</span>
+                    </Link>
+                    <Link 
+                    to="/airport-taxis" 
+                    className="flex items-center space-x-2 hover:bg-white/10 rounded-full px-4 py-2 font-semibold text-white no-underline"
+                    >
+                    <i className="fa-solid fa-taxi"></i> 
+                    <span>Airport taxis</span>
+                    </Link>
                 </div>
             </div>
         </header>
